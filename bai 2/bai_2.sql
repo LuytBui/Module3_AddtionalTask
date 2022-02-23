@@ -98,24 +98,17 @@ WHERE address = "HN";
 
 /* 19.	Hiển thị học viên có số tuổi lớn thứ hai */
 SELECT *
-FROM (SELECT *
-		FROM students
-        ORDER BY age DESC
-        LIMIT 2
-	) as temp
-ORDER BY temp.age ASC
-LIMIT 1;
+FROM students
+WHERE age = ( SELECT max(age) FROM students
+				WHERE age < (SELECT max(age) FROM students))
+;
 
 /* 20.	Hiển thị học viện có số tuổi nhỏ thứ hai */
 SELECT *
-FROM (SELECT *
-		FROM students
-        ORDER BY age ASC
-        LIMIT 2
-	) as temp
-ORDER BY temp.age DESC
-LIMIT 1;
-
+FROM students
+WHERE age = ( SELECT min(age) FROM students
+				WHERE age > (SELECT min(age) FROM students))
+;
 
 
 
