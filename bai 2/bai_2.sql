@@ -111,7 +111,15 @@ WHERE age = ( SELECT min(age) FROM students
 ;
 
 
+DELIMITER //
+CREATE PROCEDURE insert_student
+	(IN inputID int, IN inputName varchar(50), IN inputAddress varchar(50), IN inputClassID int)
+BEGIN
+	INSERT INTO student(studentID, studentName, address, classID) values (inputID, inputName, inputAddress, inputClassID);
+END
+// DELIMITER ;
 
-
+drop procedure insert_student;
+call insert_student(8,"skdjflsdjf", "HT", 1);
 
 
